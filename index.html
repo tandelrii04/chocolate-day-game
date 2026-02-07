@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate Day 🍫</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffe0ec, #fff5f8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 360px;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        h2 {
+            color: #d6336c;
+            font-size: 20px;
+            margin-bottom: 15px;
+            animation: slideDown 0.8s ease;
+        }
+
+        .option {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 12px;
+            background: #ffe3ec;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: popIn 0.6s ease;
+        }
+
+        .option:hover {
+            background: #f783ac;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .message {
+            margin-top: 18px;
+            font-size: 18px;
+            /* increased size */
+            line-height: 1.6;
+            /* better readability */
+            color: #444;
+            font-weight: 500;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .next-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background: #d6336c;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            display: none;
+            animation: popIn 0.6s ease;
+        }
+
+        .next-btn:hover {
+            background: #a61e4d;
+        }
+
+        .heart {
+            font-size: 24px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h2 id="question">🍫 Pick your favorite chocolate</h2>
+
+        <div id="options">
+            <button class="option" onclick="selectOption(1)">Milk 🍫</button>
+            <button class="option" onclick="selectOption(2)">Dark 🤎</button>
+            <button class="option" onclick="selectOption(3)">White 🤍</button>
+        </div>
+
+        <div class="message" id="message"></div>
+
+        <button class="next-btn" id="nextBtn" onclick="nextStep()">Next ➜</button>
+    </div>
+
+    <script>
+        let step = 1;
+
+        function selectOption(choice) {
+            const msg = document.getElementById("message");
+            const nextBtn = document.getElementById("nextBtn");
+
+            if (step === 1) {
+                if (choice === 1) msg.innerHTML = "That’s your smile 😄 — sweet and irresistible 🍫";
+                if (choice === 2) msg.innerHTML = "That’s your hugs 🤎 — warm and comforting 🍫";
+                if (choice === 3) msg.innerHTML = "That’s our cute little fights 🤍 — silly but special 🍫";
+            }
+
+            if (step === 2) {
+                if (choice === 4) msg.innerHTML = "You make my days brighter and sweeter 💕";
+                if (choice === 5) msg.innerHTML = "That’s us — perfectly balanced together 🥰";
+                if (choice === 6) msg.innerHTML = "Even the hard moments feel worth it with you 🤎";
+            }
+
+            nextBtn.style.display = "inline-block";
+        }
+
+        function nextStep() {
+            const q = document.getElementById("question");
+            const opt = document.getElementById("options");
+            const msg = document.getElementById("message");
+            const nextBtn = document.getElementById("nextBtn");
+
+            msg.innerHTML = "";
+            nextBtn.style.display = "none";
+
+            if (step === 1) {
+                q.innerHTML = "🍬 How do you like your chocolate?";
+                opt.innerHTML = `
+        <button class="option" onclick="selectOption(4)">Extra Sweet 💕</button>
+        <button class="option" onclick="selectOption(5)">Perfectly Balanced 🥰</button>
+        <button class="option" onclick="selectOption(6)">A little bitter but real 🤎</button>
+      `;
+                step = 2;
+            } else {
+                q.innerHTML = "💖 Just one last thing…";
+                opt.innerHTML = "";
+                msg.innerHTML = `
+        No matter the flavor…<br><br>
+        <b>You’re my favorite one 🍫💕</b><br><br>
+        Happy Chocolate Day 🥰<br>
+        <span class="heart">💗</span>
+      `;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
